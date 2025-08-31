@@ -1,6 +1,9 @@
 #!/bin/sh
 set -e
 
+echo "📦 Installing Composer dependencies..."
+composer install --no-interaction --optimize-autoloader
+
 echo "🔧 Setting up Laravel storage and cache directories..."
 
 mkdir -p \
