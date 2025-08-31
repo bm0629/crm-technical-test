@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# Install dependencies if missing
+# Install composer dependencies if vendor folder is missing
 if [ ! -d vendor ]; then
     echo "📦 Installing Composer dependencies..."
     composer install --no-interaction --optimize-autoloader
@@ -16,7 +16,6 @@ mkdir -p \
     storage/framework/views \
     bootstrap/cache \
     database
-
 chmod -R 777 bootstrap/cache database storage/framework/cache storage/framework/sessions storage/framework/testing storage/framework/views
 
 if [ ! -f database/database.sqlite ]; then
@@ -35,14 +34,9 @@ done
 echo "📦 Migrating database..."
 php artisan migrate --force
 
-# Seed database only if empty
-CUSTOMER_COUNT=$(php artisan tinker --execute='echo App\Models\Customer::count();')
-if [ "$CUSTOMER_COUNT" -eq 0 ]; then
-    echo "🌱 Seeding database..."
-    php artisan db:seed --force
-else
-    echo "🌱 Database already seeded, skipping."
-fi
+# Seed database
+echo "🌱 Seeding database..."
+php artisan db:seed --force
 
 # Sync all customers to Elasticsearch
 echo "🔍 Syncing customers to Elasticsearch..."
