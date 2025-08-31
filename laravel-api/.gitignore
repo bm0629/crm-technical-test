@@ -1,0 +1,41 @@
+# Logs
+*.log
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
+
+# Backup / production env files
+.env.backup
+.env.production
+
+# IDE / Editor configs
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+
+# Node
+/node_modules
+/public/build
+/public/hot
+
+# Laravel
+/storage/*.key
+/storage/pail
+/vendor
+
+# Homestead
+Homestead.json
+Homestead.yaml
+
+# Docker / Elasticsearch
+esdata/
+
+# React build output (if any)
+dist/
